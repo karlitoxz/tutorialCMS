@@ -19,7 +19,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Chewy|Open+Sans:300,400" rel="stylesheet">
 
-	<link rel="stylesheet" href="vistas/css/fontawesome-all.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
 
 	<!-- JdSlider -->
 	<!-- https://www.jqueryscript.net/slider/Carousel-Slideshow-jdSlider.html -->
@@ -57,7 +57,31 @@
 </head>
 
 <body>
-Hola soy la plantilla
+<?php 
+	/*=============================================
+	Modulos fijos superiores
+	=============================================*/
+	
+	include "paginas/modulos/cabecera.php";
+	include "paginas/modulos/redes-sociales-movil.php";
+	include "paginas/modulos/buscador-movil.php";
+	include "paginas/modulos/menu.php";
+
+	/*=============================================
+	Navegar entre paginas
+	=============================================*/
+	
+	
+	//include "paginas/inicio.php";
+	//include "paginas/categorias.php";
+	include "paginas/articulos.php";
+
+	/*=============================================
+	Modulos fijos inferiores
+	=============================================*/
+
+	include "paginas/modulos/footer.php";
+ ?>
 </body>
 
 
