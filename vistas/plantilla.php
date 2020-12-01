@@ -1,6 +1,6 @@
 <?php 
 	$blog = ControladorBlog::ctrMostrarBlog();
-	echo '<pre class="bg-white">'; print_r($blog); echo '</pre>';
+	$categorias = ControladorBlog::ctrMostrarCategorias();
 ?>
 
 <!DOCTYPE html>
@@ -11,18 +11,22 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Juanito Travel</title>
+	<title><?php echo $blog['titulo'] ?></title>
 
 	<meta name="titulo" content="Juanito Travel">
 
-	<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
+	<meta name="description" content="<?php echo $blog['descripcion']; ?>">
+<?php
+ $pc = json_decode($blog['palabras_claves'],true);
+ $p_clave = "";
+ foreach ($pc as $key => $value) {
+  	$p_clave .= $value.", ";
+  }
+$p_clave =substr($p_clave, 0,-2);
+?>
 
-	
+	<meta name="keywords" content="<?php echo $p_clave; ?>">
+
 	<link rel="icon" href="vistas/img/icono.jpg">
 
 	<!--=====================================
@@ -87,9 +91,9 @@
 	=============================================*/
 	
 	
-	//include "paginas/inicio.php";
+	include "paginas/inicio.php";
 	//include "paginas/categorias.php";
-	include "paginas/articulos.php";
+	//include "paginas/articulos.php";
 
 	/*=============================================
 	Modulos fijos inferiores

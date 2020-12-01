@@ -10,6 +10,14 @@ class ControladorBlog{
 		return $respuesta;
 	}
 
+	//Mostar categorias
+	static public function ctrMostrarCategorias(){
+
+		$tabla = "categorias";
+		$respuesta = ModeloBlog::mdlMostarCategorias($tabla);
+		return $respuesta;
+	}
+
 
 
 
