@@ -1,3 +1,8 @@
+<?php 
+	$blog = ControladorBlog::ctrMostrarBlog();
+	echo '<pre class="bg-white">'; print_r($blog); echo '</pre>';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
