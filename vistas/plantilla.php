@@ -1,6 +1,7 @@
 <?php 
 	$blog = ControladorBlog::ctrMostrarBlog();
 	$categorias = ControladorBlog::ctrMostrarCategorias();
+	$articulos = ControladorBlog::ctrMostrarConInnerJoin();
 ?>
 
 <!DOCTYPE html>
@@ -10,22 +11,58 @@
 	<meta charset="UTF-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title><?php echo $blog['titulo'] ?></title>
 
-	<meta name="titulo" content="Juanito Travel">
 
-	<meta name="description" content="<?php echo $blog['descripcion']; ?>">
-<?php
- $pc = json_decode($blog['palabras_claves'],true);
- $p_clave = "";
- foreach ($pc as $key => $value) {
-  	$p_clave .= $value.", ";
-  }
-$p_clave =substr($p_clave, 0,-2);
-?>
+<?php 
 
-	<meta name="keywords" content="<?php echo $p_clave; ?>">
+		$validarRuta = "";
+
+
+	if (isset($_GET['pagina'])) {
+
+		foreach ($categorias as $key => $value) {
+			if ($_GET['pagina'] == $value["ruta_categoria"]) {
+				$validarRuta = 'categorias';
+				break;
+			}
+		}
+
+		if ($validarRuta == 'categorias') {
+			echo '	<title>'.$blog['titulo']." | ".$value["descripcion_categoria"].'</title>	<meta name="titulo" content="'.$value["titulo_categoria"].'"> 	<meta name="description" content="'.$value["ruta_categoria"].'">';
+			$pc = json_decode($value['p_claves_categoria'],true);
+			$p_clave = "";
+			foreach ($pc as $key => $value) {
+				$p_clave .= $value.", ";
+			}
+			$p_clave =substr($p_clave, 0,-2);
+			echo '<meta name="keywords" content="'.$p_clave.'">';
+		}else{
+			echo '	<title>'.$blog['titulo'] .'</title>	<meta name="titulo" content="Juanito Travel"> 	<meta name="description" content="'.$blog['descripcion'].'">';
+			$pc = json_decode($blog['palabras_claves'],true);
+			$p_clave = "";
+			foreach ($pc as $key => $value) {
+				$p_clave .= $value.", ";
+			}
+			$p_clave =substr($p_clave, 0,-2);
+		echo '<meta name="keywords" content="'.$p_clave.'">';
+		}
+
+	} else {
+		echo '	<title>'.$blog['titulo'] .'</title>	<meta name="titulo" content="Juanito Travel"> 	<meta name="description" content="'.$blog['descripcion'].'">';
+			$pc = json_decode($blog['palabras_claves'],true);
+			$p_clave = "";
+			foreach ($pc as $key => $value) {
+				$p_clave .= $value.", ";
+			}
+			$p_clave =substr($p_clave, 0,-2);
+		echo '<meta name="keywords" content="'.$p_clave.'">';
+	}
+
+
+
+
+
+ ?>
 
 	<link rel="icon" href="vistas/img/icono.jpg">
 
@@ -89,12 +126,25 @@ $p_clave =substr($p_clave, 0,-2);
 	/*=============================================
 	Navegar entre paginas
 	=============================================*/
+	$validarRuta = "";
+	if (isset($_GET['pagina'])) {
+		foreach ($categorias as $key => $value) {
+			if ($_GET['pagina'] == $value["ruta_categoria"]) {
+				$validarRuta = "categorias";
+				break;
+			}
+		}
+		//Validar ruta
+		if ($validarRuta == "categorias") {
+			include "paginas/categorias.php";
+		} else {
+			include "paginas/404.php";
+		}
+		
+	} else {
+		include "paginas/inicio.php";
+	}
 	
-	
-	include "paginas/inicio.php";
-	//include "paginas/categorias.php";
-	//include "paginas/articulos.php";
-
 	/*=============================================
 	Modulos fijos inferiores
 	=============================================*/
